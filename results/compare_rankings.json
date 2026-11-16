@@ -1,0 +1,487 @@
+{
+  "k": 10,
+  "queries": 469,
+  "partition": "hash",
+  "documents": 50000,
+  "brute_force_check": {
+    "queries": 25,
+    "bit_identical": 25
+  },
+  "runs": [
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 2,
+      "mode": "cached",
+      "statuses": {
+        "COMPLETE": 469
+      },
+      "cursor_pages_bit_identical": "50/50"
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 2,
+      "mode": "dfs",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 0,
+      "same_ranking": 75,
+      "top1_same": 408,
+      "mean_overlap_at_k": 0.9149253731343265,
+      "max_score_diff_when_same_ranking": 0.7951735763517807,
+      "examples": [
+        {
+          "query": "linearizable snapshot election",
+          "single_node": [
+            38916,
+            25592,
+            29658,
+            32519,
+            30422
+          ],
+          "distributed": [
+            25592,
+            38916,
+            32519,
+            29658,
+            30422
+          ]
+        },
+        {
+          "query": "crawler",
+          "single_node": [
+            3595,
+            21430,
+            35874,
+            19696,
+            32099
+          ],
+          "distributed": [
+            3595,
+            21430,
+            35874,
+            19696,
+            32099
+          ]
+        },
+        {
+          "query": "document score relevance",
+          "single_node": [
+            10552,
+            33736,
+            20523,
+            21003,
+            45609
+          ],
+          "distributed": [
+            10552,
+            33736,
+            20523,
+            21003,
+            45609
+          ]
+        }
+      ],
+      "shards": 2,
+      "mode": "local",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 3,
+      "mode": "cached",
+      "statuses": {
+        "COMPLETE": 469
+      },
+      "cursor_pages_bit_identical": "50/50"
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 3,
+      "mode": "dfs",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 0,
+      "same_ranking": 26,
+      "top1_same": 387,
+      "mean_overlap_at_k": 0.900852878464817,
+      "max_score_diff_when_same_ranking": 1.1731859591994755,
+      "examples": [
+        {
+          "query": "linearizable snapshot election",
+          "single_node": [
+            38916,
+            25592,
+            29658,
+            32519,
+            30422
+          ],
+          "distributed": [
+            38916,
+            25592,
+            29658,
+            32519,
+            16940
+          ]
+        },
+        {
+          "query": "crawler",
+          "single_node": [
+            3595,
+            21430,
+            35874,
+            19696,
+            32099
+          ],
+          "distributed": [
+            3595,
+            21430,
+            35874,
+            19696,
+            45968
+          ]
+        },
+        {
+          "query": "document score relevance",
+          "single_node": [
+            10552,
+            33736,
+            20523,
+            21003,
+            45609
+          ],
+          "distributed": [
+            10552,
+            33736,
+            20523,
+            21003,
+            45609
+          ]
+        }
+      ],
+      "shards": 3,
+      "mode": "local",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 4,
+      "mode": "cached",
+      "statuses": {
+        "COMPLETE": 469
+      },
+      "cursor_pages_bit_identical": "50/50"
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 4,
+      "mode": "dfs",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 0,
+      "same_ranking": 10,
+      "top1_same": 342,
+      "mean_overlap_at_k": 0.8492537313432823,
+      "max_score_diff_when_same_ranking": 0.9054945025480503,
+      "examples": [
+        {
+          "query": "linearizable snapshot election",
+          "single_node": [
+            38916,
+            25592,
+            29658,
+            32519,
+            30422
+          ],
+          "distributed": [
+            25592,
+            29658,
+            32519,
+            38916,
+            16940
+          ]
+        },
+        {
+          "query": "crawler",
+          "single_node": [
+            3595,
+            21430,
+            35874,
+            19696,
+            32099
+          ],
+          "distributed": [
+            35874,
+            3595,
+            21430,
+            32099,
+            45968
+          ]
+        },
+        {
+          "query": "document score relevance",
+          "single_node": [
+            10552,
+            33736,
+            20523,
+            21003,
+            45609
+          ],
+          "distributed": [
+            10552,
+            33736,
+            20523,
+            13779,
+            21003
+          ]
+        }
+      ],
+      "shards": 4,
+      "mode": "local",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 8,
+      "mode": "cached",
+      "statuses": {
+        "COMPLETE": 469
+      },
+      "cursor_pages_bit_identical": "50/50"
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 8,
+      "mode": "dfs",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 0,
+      "same_ranking": 1,
+      "top1_same": 321,
+      "mean_overlap_at_k": 0.8029850746268652,
+      "max_score_diff_when_same_ranking": 0.19599978718133038,
+      "examples": [
+        {
+          "query": "linearizable snapshot election",
+          "single_node": [
+            38916,
+            25592,
+            29658,
+            32519,
+            30422
+          ],
+          "distributed": [
+            25592,
+            32519,
+            29658,
+            30422,
+            38916
+          ]
+        },
+        {
+          "query": "crawler",
+          "single_node": [
+            3595,
+            21430,
+            35874,
+            19696,
+            32099
+          ],
+          "distributed": [
+            35874,
+            3595,
+            21430,
+            19696,
+            12503
+          ]
+        },
+        {
+          "query": "document score relevance",
+          "single_node": [
+            10552,
+            33736,
+            20523,
+            21003,
+            45609
+          ],
+          "distributed": [
+            10552,
+            21003,
+            13779,
+            33736,
+            20523
+          ]
+        }
+      ],
+      "shards": 8,
+      "mode": "local",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 16,
+      "mode": "cached",
+      "statuses": {
+        "COMPLETE": 469
+      },
+      "cursor_pages_bit_identical": "50/50"
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 16,
+      "mode": "dfs",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 0,
+      "same_ranking": 0,
+      "top1_same": 253,
+      "mean_overlap_at_k": 0.7268656716417908,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [
+        {
+          "query": "linearizable snapshot election",
+          "single_node": [
+            38916,
+            25592,
+            29658,
+            32519,
+            30422
+          ],
+          "distributed": [
+            32519,
+            25592,
+            38916,
+            30422,
+            29658
+          ]
+        },
+        {
+          "query": "crawler",
+          "single_node": [
+            3595,
+            21430,
+            35874,
+            19696,
+            32099
+          ],
+          "distributed": [
+            21430,
+            35874,
+            12503,
+            3595,
+            10007
+          ]
+        },
+        {
+          "query": "document score relevance",
+          "single_node": [
+            10552,
+            33736,
+            20523,
+            21003,
+            45609
+          ],
+          "distributed": [
+            10552,
+            47959,
+            20523,
+            1940,
+            24512
+          ]
+        }
+      ],
+      "shards": 16,
+      "mode": "local",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    }
+  ]
+}

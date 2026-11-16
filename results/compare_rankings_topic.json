@@ -1,0 +1,174 @@
+{
+  "k": 10,
+  "queries": 469,
+  "partition": "topic",
+  "documents": 50000,
+  "brute_force_check": {
+    "queries": 25,
+    "bit_identical": 25
+  },
+  "runs": [
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 4,
+      "mode": "cached",
+      "statuses": {
+        "COMPLETE": 469
+      },
+      "cursor_pages_bit_identical": "50/50"
+    },
+    {
+      "queries": 469,
+      "bit_identical": 0,
+      "same_ranking": 0,
+      "top1_same": 50,
+      "mean_overlap_at_k": 0.12622601279317697,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [
+        {
+          "query": "linearizable snapshot election",
+          "single_node": [
+            38916,
+            25592,
+            29658,
+            32519,
+            30422
+          ],
+          "distributed": [
+            3989,
+            48352,
+            1925,
+            44688,
+            38813
+          ]
+        },
+        {
+          "query": "crawler",
+          "single_node": [
+            3595,
+            21430,
+            35874,
+            19696,
+            32099
+          ],
+          "distributed": [
+            34785,
+            47287,
+            40027,
+            48590,
+            7212
+          ]
+        },
+        {
+          "query": "document score relevance",
+          "single_node": [
+            10552,
+            33736,
+            20523,
+            21003,
+            45609
+          ],
+          "distributed": [
+            48138,
+            16548,
+            44641,
+            27802,
+            25799
+          ]
+        }
+      ],
+      "shards": 4,
+      "mode": "local",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    },
+    {
+      "queries": 469,
+      "bit_identical": 469,
+      "same_ranking": 469,
+      "top1_same": 469,
+      "mean_overlap_at_k": 1.0,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [],
+      "shards": 8,
+      "mode": "cached",
+      "statuses": {
+        "COMPLETE": 469
+      },
+      "cursor_pages_bit_identical": "50/50"
+    },
+    {
+      "queries": 469,
+      "bit_identical": 0,
+      "same_ranking": 0,
+      "top1_same": 34,
+      "mean_overlap_at_k": 0.12046908315565028,
+      "max_score_diff_when_same_ranking": 0.0,
+      "examples": [
+        {
+          "query": "linearizable snapshot election",
+          "single_node": [
+            38916,
+            25592,
+            29658,
+            32519,
+            30422
+          ],
+          "distributed": [
+            3989,
+            48352,
+            1925,
+            44688,
+            24593
+          ]
+        },
+        {
+          "query": "crawler",
+          "single_node": [
+            3595,
+            21430,
+            35874,
+            19696,
+            32099
+          ],
+          "distributed": [
+            34785,
+            47287,
+            40027,
+            48590,
+            7212
+          ]
+        },
+        {
+          "query": "document score relevance",
+          "single_node": [
+            10552,
+            33736,
+            20523,
+            21003,
+            45609
+          ],
+          "distributed": [
+            48138,
+            16548,
+            44641,
+            27802,
+            25799
+          ]
+        }
+      ],
+      "shards": 8,
+      "mode": "local",
+      "statuses": {
+        "COMPLETE": 469
+      }
+    }
+  ]
+}

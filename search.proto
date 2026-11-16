@@ -1,0 +1,165 @@
+// =====================================================================================
+// search.proto : THE CONTRACT (the "pre-printed request form" of the library analogy)
+// =====================================================================================
+//
+// Guide for this file : ../docs/code_guides/01_search_proto_GUIDE.md
+// My notes behind it  : self learning/learning_guide/02_Medium_Architecture_and_Design/
+//                         03_gRPC_and_Communication.md   (sections 4, 5 and 14.2)
+//                       self learning/learning_guide/doubts/02_03_gRPC_Step_by_Step_Lesson.md
+//
+// WHAT THIS FILE IS
+//   Both sides (coordinator and shard server) are generated from THIS ONE FILE, so they can
+//   never disagree about what "field 2" means. On the wire only the field NUMBER travels,
+//   never the field NAME. That is why a hit costs ~15 bytes instead of ~42 bytes of JSON.
+//
+// DO I WRITE ANY NETWORK CODE MYSELF?  (the unanswered doubt in 02_03_deadlines.md)
+//   No. I only write this .proto file. The compiler generates the "stubs":
+//       python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. search.proto
+//         -> search_pb2.py        message classes (SearchRequest, Hit, ...)
+//         -> search_pb2_grpc.py   client stub + server base class
+//   The stubs do object -> bytes -> network -> bytes -> object. I never touch bytes.
+//
+// RULES FOR CHANGING THIS FILE (notes: 03_gRPC section 4.1)
+//   - add NEW fields with NEW numbers
+//   - NEVER change or reuse an existing field number
+//   (The cursor fields 7, 8, 9 in SearchRequest were added exactly this way.)
+//
+// WHY EVERY CALL IS SAFE TO RETRY
+//   The index is STATIC and READ-ONLY, so every call below only READS. Doing it twice gives
+//   the same answer and changes nothing: it is IDEMPOTENT. That is what makes "retry on the
+//   other replica" safe (notes: 03_gRPC section 8, "Why retrying is safe here").
+
+syntax = "proto3";
+
+package search.v1;
+
+// =====================================================================================
+// SERVICE 1: ShardService  -- offered by every shard server process
+//            (one OS process per shard copy = one Assistant Librarian per box of books)
+// =====================================================================================
+service ShardService {
+  // Round 1 (statistics): "how many books do you have, and how many mention 'apple'?"
+  // Returns EXACT INTEGER counts, never averages (the "average of averages" trap).
+  rpc GetStats (StatsRequest) returns (StatsReply);
+
+  // Round 2 (search): "give me YOUR local top-k, scored with the GLOBAL statistics I attach".
+  rpc Search (SearchRequest) returns (SearchReply);
+
+  // Heartbeat: the intercom roll call "Room A, box S0, are you there?"
+  rpc Health (HealthRequest) returns (HealthReply);
+}
+
+// ---------- Round 1: GetStats ----------
+
+message StatsRequest {
+  int32 shard_id = 1;            // the shard the coordinator EXPECTS to reach (misroute check)
+  repeated string terms = 2;     // analysed query terms (may be empty: then only totals come back)
+}
+
+message StatsReply {
+  int32 shard_id = 1;                    // echoed back
+  int64 doc_count = 2;                   // N_s      : documents in this shard        (integer)
+  int64 total_doc_length = 3;            // sum_dl_s : total tokens in this shard     (integer)
+  map<string, int64> doc_freqs = 4;      // df_s(t)  : docs in this shard containing t (0 if absent)
+}
+
+// ---------- Round 2: Search ----------
+
+message SearchRequest {
+  int32 shard_id = 1;                    // wrong shard_id -> INVALID_ARGUMENT (a LOGICAL error)
+  repeated string terms = 2;             // analysed AND SORTED: fixed order -> bit-identical scores
+  uint32 k = 3;                          // must be > 0 ("k = 0" and "k never set" look identical)
+  int64 global_doc_count = 4;            // N      = sum of N_s over all shards
+  double global_avg_doc_length = 5;      // avgdl  = (sum of sum_dl_s) / (sum of N_s)  ONE division
+  map<string, int64> global_doc_freqs = 6;  // df(t) = sum of df_s(t) over all shards
+
+  // ---- added later, with NEW field numbers (contract evolution rule) ----
+  // search_after cursor for deep pagination: "skip everything at or above this bookmark".
+  // (notes: doubts 01_Basics_and_Intuition/02_The_Scatter_Gather_Pattern.md)
+  bool has_cursor = 7;
+  double cursor_score = 8;               // score of the LAST hit on the previous page
+  int64 cursor_doc_id = 9;               // doc id of the LAST hit on the previous page
+}
+
+message Hit {
+  int64 doc_id = 1;              // corpus-wide (GLOBAL) document id, already translated by the shard
+  double score = 2;              // the 8 raw bytes of the float: copied bit for bit, no rounding
+}
+
+message SearchReply {
+  int32 shard_id = 1;            // echoed back
+  repeated Hit hits = 2;         // up to k hits: score DESCENDING, ties -> doc_id ASCENDING
+  double took_ms = 3;            // time spent computing inside the shard (for tail-latency analysis)
+}
+
+// ---------- Heartbeat ----------
+
+message HealthRequest {}
+
+message HealthReply {
+  int32 shard_id = 1;
+  int32 copy_id = 2;
+  bool serving = 3;              // true once the index files are memory-mapped and ready
+}
+
+// =====================================================================================
+// SERVICE 2: CoordinatorService -- what the CLIENT talks to (the Head Librarian's front desk)
+//            Also gRPC, so that "gRPC for all communication" holds end to end.
+// =====================================================================================
+service CoordinatorService {
+  rpc Query (QueryRequest) returns (QueryReply);
+  rpc ClusterHealth (ClusterHealthRequest) returns (ClusterHealthReply);
+}
+
+message QueryRequest {
+  string query = 1;              // raw text; the coordinator analyses it ONCE for all shards
+  uint32 k = 2;                  // top-k wanted
+  uint32 timeout_ms = 3;         // the client's TOTAL time budget (0 -> coordinator default, 500 ms)
+  bool has_cursor = 4;           // search_after: pass the last hit of the previous page
+  double cursor_score = 5;
+  int64 cursor_doc_id = 6;
+}
+
+// PARTIAL is a field inside a SUCCESSFUL reply, not a gRPC error code:
+// a partial answer is still a useful answer (notes: 03_gRPC section 14.2, design notes).
+enum ResultStatus {
+  RESULT_STATUS_UNSPECIFIED = 0;
+  COMPLETE = 1;                  // every shard answered (maybe via a replica)
+  PARTIAL = 2;                   // at least one shard had NO copy that answered -> said explicitly
+  FAILED = 3;                    // no shard answered at all
+}
+
+message FailedShard {
+  int32 shard_id = 1;
+  repeated string errors = 2;    // e.g. "copy 0 (127.0.0.1:20051): UNAVAILABLE"
+}
+
+message QueryReply {
+  repeated Hit hits = 1;                 // the final GLOBAL top-k
+  ResultStatus status = 2;
+  uint32 shards_total = 3;
+  uint32 shards_successful = 4;
+  repeated FailedShard failed_shards = 5;
+  double took_ms = 6;                    // end-to-end time inside the coordinator
+  repeated string terms = 7;             // the analysed terms actually searched
+  string cluster_color = 8;              // GREEN / YELLOW / RED at the moment of the reply
+  double slowest_shard_ms = 9;           // max() of the shards' own took_ms (the max() rule)
+  uint32 retries = 10;                   // how many failover attempts this query needed
+}
+
+message ClusterHealthRequest {}
+
+message CopyHealth {
+  int32 shard_id = 1;
+  int32 copy_id = 2;
+  string node = 3;
+  string address = 4;
+  string state = 5;              // UP / SUSPECT / DOWN
+  uint32 misses = 6;             // consecutive missed heartbeats
+  uint32 outstanding = 7;        // requests in flight to this copy (least-outstanding-requests)
+}
+
+message ClusterHealthReply {
+  string color = 1;              // GREEN / YELLOW / RED
+  repeated CopyHealth copies = 2;
+}

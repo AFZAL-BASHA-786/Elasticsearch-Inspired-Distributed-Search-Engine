@@ -1,0 +1,177 @@
+{
+  "args": {
+    "shards": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "copies": 2,
+    "nodes": 3,
+    "k": 10,
+    "rate": 100.0,
+    "total": 3000,
+    "concurrency": 32,
+    "seconds": 6.0,
+    "stats_mode": "cached",
+    "port": 20050,
+    "corpus": "D:\\codex\\Sem 3\\Distributed Systems\\Elasticsearch-Inspired Distributed Search Engine\\search_engine\\data\\corpus.jsonl",
+    "queries_file": "D:\\codex\\Sem 3\\Distributed Systems\\Elasticsearch-Inspired Distributed Search Engine\\search_engine\\data\\queries.txt",
+    "tag": ""
+  },
+  "physical_cores": 8,
+  "logical_processors": 16,
+  "rows": [
+    {
+      "latency": {
+        "count": 3000,
+        "p50": 2.6449999999993423,
+        "p95": 4.793999999996856,
+        "p99": 6.070100000002299,
+        "mean": 2.894256766666312,
+        "max": 14.133599999999191,
+        "statuses": {
+          "COMPLETE": 3000
+        },
+        "shard_compute_p50": 0.6092999999971482,
+        "coordinator_p50": 1.5817000000009074
+      },
+      "throughput": {
+        "count": 6975,
+        "p50": 27.13640000000339,
+        "p95": 32.1101999999982,
+        "p99": 36.37650000000292,
+        "mean": 27.57768369892474,
+        "max": 45.62389999999539,
+        "qps": 1157.9591019802224,
+        "completed": 6975,
+        "load_generator_cpu_pct": 46.95129871380382,
+        "coordinator_cpu_pct": 137.7228572659769
+      },
+      "shards": 1,
+      "copies": 2,
+      "processes": 2
+    },
+    {
+      "latency": {
+        "count": 3000,
+        "p50": 2.6065000000059513,
+        "p95": 4.0028000000020825,
+        "p99": 5.135400000000345,
+        "mean": 2.788698966669958,
+        "max": 10.895700000006059,
+        "statuses": {
+          "COMPLETE": 3000
+        },
+        "shard_compute_p50": 0.41920000000006397,
+        "coordinator_p50": 1.6015999999989816
+      },
+      "throughput": {
+        "count": 5106,
+        "p50": 37.373999999999796,
+        "p95": 41.163500000010345,
+        "p99": 43.490700000006655,
+        "mean": 37.70622285546393,
+        "max": 50.71990000000426,
+        "qps": 846.1842946637121,
+        "completed": 5106,
+        "load_generator_cpu_pct": 38.582507070386896,
+        "coordinator_cpu_pct": 142.40404912522507
+      },
+      "shards": 2,
+      "copies": 2,
+      "processes": 4
+    },
+    {
+      "latency": {
+        "count": 3000,
+        "p50": 3.4074000000003934,
+        "p95": 4.708600000000729,
+        "p99": 5.994100000009439,
+        "mean": 3.5521253666677683,
+        "max": 13.619800000000737,
+        "statuses": {
+          "COMPLETE": 3000
+        },
+        "shard_compute_p50": 0.5187000000006492,
+        "coordinator_p50": 2.355700000002514
+      },
+      "throughput": {
+        "count": 3689,
+        "p50": 51.76240000000121,
+        "p95": 56.7558000000048,
+        "p99": 68.70159999999714,
+        "mean": 52.24732705340206,
+        "max": 75.421999999989,
+        "qps": 609.9342701167573,
+        "completed": 3689,
+        "load_generator_cpu_pct": 24.54245546773005,
+        "coordinator_cpu_pct": 148.01975054862274
+      },
+      "shards": 4,
+      "copies": 2,
+      "processes": 8
+    },
+    {
+      "latency": {
+        "count": 3000,
+        "p50": 4.145100000016555,
+        "p95": 5.3345000000035725,
+        "p99": 7.40000000000407,
+        "mean": 4.289964166666682,
+        "max": 17.128199999973504,
+        "statuses": {
+          "COMPLETE": 3000
+        },
+        "shard_compute_p50": 0.632299999999475,
+        "coordinator_p50": 3.172999999998538
+      },
+      "throughput": {
+        "count": 2009,
+        "p50": 94.82380000000035,
+        "p95": 106.8317999999806,
+        "p99": 126.1133000000143,
+        "mean": 96.29979178695838,
+        "max": 129.99529999999027,
+        "qps": 329.62937008516394,
+        "completed": 2009,
+        "load_generator_cpu_pct": 16.151264866977762,
+        "coordinator_cpu_pct": 152.78960763563109
+      },
+      "shards": 8,
+      "copies": 2,
+      "processes": 16
+    },
+    {
+      "latency": {
+        "count": 3000,
+        "p50": 6.064599999973552,
+        "p95": 8.019399999966481,
+        "p99": 11.423399999983985,
+        "mean": 6.285847033309242,
+        "max": 23.744299999975738,
+        "statuses": {
+          "COMPLETE": 3000
+        },
+        "shard_compute_p50": 0.6067999999999074,
+        "coordinator_p50": 5.021700000000351
+      },
+      "throughput": {
+        "count": 1209,
+        "p50": 160.58580000000688,
+        "p95": 179.83889999999292,
+        "p99": 184.9129000000005,
+        "mean": 160.83171116625275,
+        "max": 186.59009999998943,
+        "qps": 196.55702968089165,
+        "completed": 1209,
+        "load_generator_cpu_pct": 8.128909416083195,
+        "coordinator_cpu_pct": 165.87653955376229
+      },
+      "shards": 16,
+      "copies": 2,
+      "processes": 32
+    }
+  ]
+}
