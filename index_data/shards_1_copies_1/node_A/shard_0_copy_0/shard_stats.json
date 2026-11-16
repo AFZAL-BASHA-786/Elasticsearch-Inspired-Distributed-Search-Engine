@@ -1,0 +1,8 @@
+{
+  "shard_id": 0,
+  "doc_count": 50000,
+  "total_doc_length": 4243400,
+  "num_terms": 343,
+  "num_postings": 1942107,
+  "num_shards": 1
+}

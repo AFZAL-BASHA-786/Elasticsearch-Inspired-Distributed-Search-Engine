@@ -1,0 +1,26 @@
+{
+  "num_shards": 1,
+  "copies_per_shard": 1,
+  "num_nodes": 1,
+  "partitioner": "murmur3_32(str(doc_id)) mod num_shards",
+  "corpus": {
+    "doc_count": 50000,
+    "total_doc_length": 4243400
+  },
+  "shards": [
+    {
+      "shard_id": 0,
+      "copies": [
+        {
+          "copy_id": 0,
+          "node": "node_A",
+          "address": "127.0.0.1:20051",
+          "path": "node_A/shard_0_copy_0"
+        }
+      ],
+      "sha256": "ba6f8b4ed23a17f220517a5499fab33594a4c4ab3bfcf5524ff831fac45bcc44",
+      "doc_count": 50000
+    }
+  ],
+  "unassigned": []
+}

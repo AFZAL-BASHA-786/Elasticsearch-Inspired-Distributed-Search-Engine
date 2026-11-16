@@ -1,4 +1,2 @@
 # generated at run time - rebuild with generate_corpus.py / build_index.py
 __pycache__/
-data/
-index_data/

@@ -1,0 +1,70 @@
+{
+  "num_shards": 3,
+  "copies_per_shard": 2,
+  "num_nodes": 3,
+  "partitioner": "murmur3_32(str(doc_id)) mod num_shards",
+  "corpus": {
+    "doc_count": 50000,
+    "total_doc_length": 4243400
+  },
+  "shards": [
+    {
+      "shard_id": 0,
+      "copies": [
+        {
+          "copy_id": 0,
+          "node": "node_A",
+          "address": "127.0.0.1:20051",
+          "path": "node_A/shard_0_copy_0"
+        },
+        {
+          "copy_id": 1,
+          "node": "node_C",
+          "address": "127.0.0.1:20052",
+          "path": "node_C/shard_0_copy_1"
+        }
+      ],
+      "sha256": "6416d54e76614fdaa595b060fbd56ba970b3b9e4f8d95efbe0da92ca5bb49546",
+      "doc_count": 16548
+    },
+    {
+      "shard_id": 1,
+      "copies": [
+        {
+          "copy_id": 0,
+          "node": "node_B",
+          "address": "127.0.0.1:20053",
+          "path": "node_B/shard_1_copy_0"
+        },
+        {
+          "copy_id": 1,
+          "node": "node_A",
+          "address": "127.0.0.1:20054",
+          "path": "node_A/shard_1_copy_1"
+        }
+      ],
+      "sha256": "f636e8fb97cb98ebbca3f01490db84db4bf345eace0782ba75417b0c2ea50737",
+      "doc_count": 17009
+    },
+    {
+      "shard_id": 2,
+      "copies": [
+        {
+          "copy_id": 0,
+          "node": "node_C",
+          "address": "127.0.0.1:20055",
+          "path": "node_C/shard_2_copy_0"
+        },
+        {
+          "copy_id": 1,
+          "node": "node_B",
+          "address": "127.0.0.1:20056",
+          "path": "node_B/shard_2_copy_1"
+        }
+      ],
+      "sha256": "787d78cb868cbe96ec33e3fe78192ab9c6d95455d61ba0593ef0405e24cf07ee",
+      "doc_count": 16443
+    }
+  ],
+  "unassigned": []
+}
